@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken'
-import config from '../config/index'
 
 export default function ensureAuthorized (req, res, next) {
 	let bearerToken
@@ -8,7 +7,7 @@ export default function ensureAuthorized (req, res, next) {
 	if (typeof bearerHeader !== 'undefined') {
 		let bearer = bearerHeader.split(" ")
 		bearerToken = (bearer[1]) ? bearer[1] : bearerHeader
-		jwt.verify(bearerToken,  config.JWT_HASH, (err, decoded) => {
+		jwt.verify(bearerToken,  "shhhhh", (err, decoded) => {
 			if (err || !decoded) {
 				return res.status(401).json(err)
 			}

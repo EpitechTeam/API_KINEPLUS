@@ -3,9 +3,9 @@ let router	= express.Router()
 import ensureAuthorized  from './../middlewares/ensureAuthorized'
 let login = require('../services/login.service')
 
-router.get('/login', login.login)
+router.post('/login', login.login)
 
-router.get('/logout', login.logout)
+router.get('/logout', ensureAuthorized, login.logout)
 
 router.post('/register', login.register)
 

@@ -5,6 +5,7 @@ import bodyParser from 'body-parser'
 import compression from 'compression'
 import mongoose from 'mongoose'
 import user from './routes/user'
+import login from './routes/login'
 
 
 let server, serverHttp
@@ -12,7 +13,7 @@ let port = 8080
 let app = express()
 
 //Connect to DB
-mongoose.connect("mongodb://" + "fluorz:lecherbonnier1@ds349065.mlab.com:49065/area" , { useNewUrlParser: true })
+mongoose.connect("mongodb://" + "fluorz:lecherbonnier1@ds155916.mlab.com:55916/api-kineplus" , { useNewUrlParser: true })
 
 server = app.listen(port, () => {console.log( "Express server listening on port " + port)})
 
@@ -28,8 +29,8 @@ app.use((req, res, next) => {
 	next()
 })
 //
-// app.use('/user', user)
-// app.use('/authentification', user)
+app.use('/user', user)
+app.use('/authentification', login)
 
 process.on('uncaughtException', err => {
 	console.log(err)

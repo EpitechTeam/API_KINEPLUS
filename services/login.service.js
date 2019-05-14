@@ -37,7 +37,7 @@ let logout = async (req, res) => {
 
 let register = async (req, res) => {
   let string = randomToken(16);
-	let token = jwt.sign({id: string}, config.JWT_HASH)
+	let token = jwt.sign({id: string}, "shhhhh")
 	let password = sha256(req.body.password);
 
 	var user = new User({
@@ -57,5 +57,6 @@ let register = async (req, res) => {
 
 module.exports = {
 	login,
-  logout
+  logout,
+  register
 }
