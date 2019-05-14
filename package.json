@@ -11,6 +11,9 @@
     "api",
     "kineplus"
   ],
+  "engines": {
+    "node": "10.x"
+  },
   "author": "Kineplus",
   "license": "ISC",
   "dependencies": {
