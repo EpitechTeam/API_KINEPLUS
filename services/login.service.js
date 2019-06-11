@@ -9,10 +9,7 @@ let User	= require('./../models/User')
 let login = async (req, res) => {
   User.findOne({email: req.body.email, password: sha256(req.body.password)}, (err, rep) => {
   if (err || !rep) {
-    res.json({
-      type: false,
-      data: "No user found"
-    })
+    res.send(400)
   }
   else {
     if (rep.disable == true) {
@@ -39,19 +36,47 @@ let register = async (req, res) => {
   let string = randomToken(16);
 	let token = jwt.sign({id: string}, "shhhhh")
 	let password = sha256(req.body.password);
+  let try_user = await User.findOne({email : req.body.email})
 
+  if (try_user) {
+    res.send(400)
+    return
+  }
+
+  if (req.body.email.indexOf('@') == -1 || req.body.email.indexOf('.') == -1) {
+    res.send(400)
+    return;
+  }
+  if (req.body.password.length < 7) {
+    res.send(400)
+    return;
+  }
+  let isKine, isPatient, isAdmin
+  if (req.body.role == "isKine") {
+    isKine = true
+  }
+  if (req.body.role == "isPatient") {
+    isPatient = true
+  }
+  if (req.body.role == "isAdmin") {
+    isAdmin = true
+  }
 	var user = new User({
 		first_name : req.body.first_name,
 		last_name : req.body.last_name,
 		email: req.body.email,
 		password : password,
 		disable: false,
-		token : token
+		token : token,
+    isKine : isKine,
+    isPatient : isPatient,
+    isSuperAdmin : isAdmin
 	})
 
   let newUser = await user.save()
   res.json({
-    data: "Register successful"
+    data: "Register successful",
+    user : newUser
   })
 }
 

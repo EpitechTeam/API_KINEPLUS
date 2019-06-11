@@ -7,10 +7,7 @@ let sha256      = require('sha256')
 let changeMDP = async (req, res) => {
 	User.findOne({token : req.token, password: sha256(req.body.password)}, (err, rep) => {
 		if (err || !rep) {
-			res.json({
-				type: false,
-				data: "Bad Password"
-			})
+			res.send(400)
 		}
 		else {
 			let newpassord = req.body.new_password

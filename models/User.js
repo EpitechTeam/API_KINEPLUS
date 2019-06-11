@@ -7,7 +7,11 @@ var UserSchema   = mongoose.Schema({
 		email: String,
 		password: String,
     disable : Boolean,
-		token: String
+		token: String,
+		isAdmin : Boolean,
+		isKine : Boolean,
+		isPatient : Boolean,
+		isSuperAdmin : Boolean
 });
 
 var User = module.exports = mongoose.model('User', UserSchema);

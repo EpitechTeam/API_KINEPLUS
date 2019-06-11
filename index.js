@@ -6,6 +6,7 @@ import compression from 'compression'
 import mongoose from 'mongoose'
 import user from './routes/user'
 import login from './routes/login'
+import exercice from './routes/exercice'
 
 
 let server, serverHttp
@@ -31,6 +32,7 @@ app.use((req, res, next) => {
 //
 app.use('/user', user)
 app.use('/authentification', login)
+app.use('/exercice', exercice)
 
 process.on('uncaughtException', err => {
 	console.log(err)
