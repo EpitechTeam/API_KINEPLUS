@@ -11,11 +11,11 @@ node {
       sh 'printenv'
     }
     stage('Install dependencies'){
-      sh 'sudo docker-compose build'
+      sh 'docker-compose build'
     }
     stage('Deploy'){
       if (env.BRANCH_NAME == 'master'){
-        sh 'sudo docker-compose up -d'
+        sh 'docker-compose up -d'
       }
     }
   }
