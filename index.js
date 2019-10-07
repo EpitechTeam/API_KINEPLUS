@@ -9,6 +9,7 @@ import login from './routes/login'
 import exercice from './routes/exercice'
 
 
+require('dotenv').config();
 let server, serverHttp
 let port = process.env.PORT || 8080
 let app = express()
