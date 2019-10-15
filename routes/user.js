@@ -1,7 +1,7 @@
 import express from "express"
 let router	= express.Router()
 import ensureAuthorized  from './../middlewares/ensureAuthorized'
-import test  from './../middlewares/permission'
+import admin  from './../middlewares/permission'
 let user = require('../services/user.service')
 
 router.get('/me', ensureAuthorized, user.me)
@@ -18,6 +18,8 @@ router.post('/saveInfo', ensureAuthorized, user.saveUserInformation)
 
 router.post('/saveBilingInfo', ensureAuthorized, user.saveBilingInfo)
 
-router.get('/listUser', test, ensureAuthorized, user.listUser)
+router.get('/listUser', ensureAuthorized, admin, user.listUser)
+
+router.post('/editRight', ensureAuthorized, admin, user.right)
 
 module.exports = router

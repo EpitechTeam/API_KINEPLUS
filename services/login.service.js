@@ -70,7 +70,10 @@ let register = async (req, res) => {
 		token : token,
     isKine : isKine,
     isPatient : isPatient,
-    isSuperAdmin : isAdmin
+    isSuperAdmin : isAdmin,
+    canRead : false,
+    canWrite : false,
+    canUpdate : false
 	})
 
   let newUser = await user.save()

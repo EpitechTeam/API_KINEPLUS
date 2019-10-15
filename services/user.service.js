@@ -131,6 +131,23 @@ let listUser = (req, res) => {
 	})
 }
 
+let right = async (req, res) => {
+	let user = await User.findOne({token : req.body.toToken})
+  
+	let new_user = { $set: {
+		canRead : req.body.canRead,
+		canWrite : req.body.canWrite,
+		canUpdate : req.body.canUpdate
+		}
+	}
+  
+	await User.updateOne({token : req.body.toToken}, new_user)
+
+	res.json({
+		"message" : "done"
+	})
+}
+
 let disableUser = (req, res) => {
 	User.findOne({"email" : req.params.email}, (err, rep) => {
 		if (err || !rep) {
@@ -195,6 +212,7 @@ module.exports = {
 	saveUserInformation,
 	findUserByEmail,
 	me,
+	right,
 	disableUser,
 	activeUser,
 	listUser,
